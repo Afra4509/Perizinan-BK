@@ -2,8 +2,8 @@
 // Smart BK Permission - Supabase Client v2
 // =============================================
 
-const SUPABASE_URL = 'https://ksrlnupdpdrjuhwctjxc.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_5rj6jx1Lp9Uf7fGbYBrhdA_xV30jR5w';
+const SUPABASE_URL = 'https://lfihcdorzonmqgisonnm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmaWhjZG9yem9ubXFnaXNvbm5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDc2NTIsImV4cCI6MjA4ODM4MzY1Mn0.ZW2hbNHjh0HiPCAdC7-AZPPA10Wsy5zDKpxmo1g2kfE';
 
 (function loadSupabase() {
     const script = document.createElement('script');
