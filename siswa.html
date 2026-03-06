@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajukan Izin — Smart BK Permission</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="app-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="brand-text">
+                <span class="brand-name">Smart BK</span>
+                <span class="brand-sub">Permission System</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#form" class="nav-item active" onclick="showTab('form', this)">
+                <i class="fas fa-plus-circle"></i>
+                <span>Ajukan Izin</span>
+            </a>
+            <a href="#status" class="nav-item" onclick="showTab('status', this)">
+                <i class="fas fa-list-check"></i>
+                <span>Status Izin</span>
+                <span class="nav-badge" id="pendingBadge" style="display:none"></span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="page-info">
+                    <h1 class="page-title" id="pageTitle">Ajukan Izin Keluar Kelas</h1>
+                    <p class="page-sub" id="pageSub">Isi formulir dengan lengkap dan jelas</p>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="user-info">
+                    <div class="user-avatar-sm">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <span class="user-role">Mode Siswa</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab: Form Pengajuan -->
+        <div id="tab-form" class="tab-content active">
+            <div class="content-wrapper">
+
+                <!-- Info Card -->
+                <div class="info-banner">
+                    <i class="fas fa-circle-info"></i>
+                    <div>
+                        <strong>Petunjuk Pengisian:</strong> Pastikan semua data terisi dengan benar dan alasan izin minimal 10 karakter. Izin akan diproses oleh Guru BK.
+                    </div>
+                </div>
+
+                <!-- Form Card -->
+                <div class="form-card">
+                    <div class="form-card-header">
+                        <div class="form-card-icon">
+                            <i class="fas fa-file-pen"></i>
+                        </div>
+                        <div>
+                            <h2>Formulir Pengajuan Izin</h2>
+                            <p>Lengkapi semua field yang tersedia</p>
+                        </div>
+                    </div>
+
+                    <form id="formIzin" onsubmit="submitIzin(event)">
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-user"></i>
+                                    Nama Lengkap
+                                </label>
+                                <input type="text" id="namaSiswa" class="form-input" 
+                                    placeholder="Masukkan nama lengkap Anda" required>
+                                <span class="form-hint">Sesuai dengan absen kelas</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-door-open"></i>
+                                    Kelas
+                                </label>
+                                <div class="select-wrapper">
+                                    <select id="kelas" class="form-input" required>
+                                        <option value="">— Pilih Kelas —</option>
+                                        <optgroup label="Kelas X">
+                                            <option>X MIPA 1</option><option>X MIPA 2</option><option>X MIPA 3</option>
+                                            <option>X IPS 1</option><option>X IPS 2</option><option>X IPS 3</option>
+                                        </optgroup>
+                                        <optgroup label="Kelas XI">
+                                            <option>XI IPA 1</option><option>XI IPA 2</option><option>XI IPA 3</option>
+                                            <option>XI IPS 1</option><option>XI IPS 2</option><option>XI IPS 3</option>
+                                        </optgroup>
+                                        <optgroup label="Kelas XII">
+                                            <option>XII IPA 1</option><option>XII IPA 2</option><option>XII IPA 3</option>
+                                            <option>XII IPS 1</option><option>XII IPS 2</option><option>XII IPS 3</option>
+                                        </optgroup>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    Guru Mata Pelajaran
+                                </label>
+                                <input type="text" id="guruMapel" class="form-input" 
+                                    placeholder="Nama guru yang sedang mengajar" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-clock"></i>
+                                    Jam Pelajaran
+                                </label>
+                                <div class="select-wrapper">
+                                    <select id="jamPelajaran" class="form-input" required>
+                                        <option value="">— Pilih Jam —</option>
+                                        <option>Jam ke-1 (07:00 - 07:45)</option>
+                                        <option>Jam ke-2 (07:45 - 08:30)</option>
+                                        <option>Jam ke-3 (08:30 - 09:15)</option>
+                                        <option>Jam ke-4 (09:30 - 10:15)</option>
+                                        <option>Jam ke-5 (10:15 - 11:00)</option>
+                                        <option>Jam ke-6 (11:00 - 11:45)</option>
+                                        <option>Jam ke-7 (12:30 - 13:15)</option>
+                                        <option>Jam ke-8 (13:15 - 14:00)</option>
+                                        <option>Jam ke-9 (14:00 - 14:45)</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    <i class="fas fa-comment-dots"></i>
+                                    Alasan Izin Keluar Kelas
+                                </label>
+                                <textarea id="alasan" class="form-input form-textarea" rows="4"
+                                    placeholder="Jelaskan alasan Anda keluar kelas dengan detail (minimal 10 karakter)..." 
+                                    required oninput="updateCharCount(this)"></textarea>
+                                <div class="char-counter">
+                                    <span id="charCount">0</span>/500 karakter
+                                    <span id="charWarning" class="char-warning" style="display:none">
+                                        <i class="fas fa-exclamation-triangle"></i> Minimal 10 karakter
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    Perkiraan Durasi Keluar
+                                </label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="durasi" class="form-input" 
+                                        placeholder="0" min="1" max="120" required oninput="checkDurasi(this)">
+                                    <span class="input-unit">menit</span>
+                                </div>
+                                <div id="durasiWarning" class="duration-warning" style="display:none">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Durasi lebih dari 20 menit akan mendapat perhatian khusus dari BK
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- AI Preview -->
+                        <div id="aiPreview" class="ai-preview-box" style="display:none">
+                            <div class="ai-preview-header">
+                                <i class="fas fa-robot"></i>
+                                <span>Prediksi Analisis AI</span>
+                            </div>
+                            <div id="aiPreviewContent"></div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="reset" class="btn-reset" onclick="resetForm()">
+                                <i class="fas fa-rotate-left"></i> Reset
+                            </button>
+                            <button type="submit" class="btn-submit" id="btnSubmit">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Kirim Pengajuan Izin</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Status Izin -->
+        <div id="tab-status" class="tab-content">
+            <div class="content-wrapper">
+
+                <!-- Search & Filter -->
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchNama" placeholder="Cari berdasarkan nama..." 
+                            oninput="filterStatus()">
+                    </div>
+                    <select class="filter-select" id="filterStatus" onchange="filterStatus()">
+                        <option value="">Semua Status</option>
+                        <option value="menunggu">Menunggu</option>
+                        <option value="disetujui">Disetujui</option>
+                        <option value="ditolak">Ditolak</option>
+                    </select>
+                    <button class="btn-refresh" onclick="loadMyStatus()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+
+                <!-- Status List -->
+                <div id="statusList" class="status-list">
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>Masukkan nama Anda di kolom pencarian untuk melihat status izin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display:none">
+        <div class="loading-box">
+            <div class="loading-spinner"></div>
+            <p id="loadingText">Mengirim pengajuan...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <script src="js/supabase.js"></script>
+    <script src="js/siswa.js"></script>
+</body>
+</html>
