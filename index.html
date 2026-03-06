@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart BK Permission</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="landing-body">
+
+    <!-- Animated Background -->
+    <div class="bg-animated">
+        <div class="bg-circle c1"></div>
+        <div class="bg-circle c2"></div>
+        <div class="bg-circle c3"></div>
+        <div class="bg-particles" id="particles"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="nav-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <span class="nav-title">Smart BK Permission</span>
+            </div>
+            <div class="nav-badge">
+                <span class="badge-dot"></span>
+                System Online
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="hero-section">
+        <div class="hero-container">
+
+            <!-- Left Content -->
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <i class="fas fa-sparkles"></i>
+                    Platform Digital Terpadu
+                </div>
+
+                <h1 class="hero-title">
+                    Izin Keluar Kelas<br>
+                    <span class="gradient-text">Lebih Mudah</span><br>
+                    & Terdigitalisasi
+                </h1>
+
+                <p class="hero-desc">
+                    Sistem perizinan modern berbasis AI untuk SMA. Ajukan izin keluar kelas secara digital, 
+                    pantau status real-time, dan BK dapat mengelola semua permohonan dalam satu dashboard.
+                </p>
+
+                <!-- Stats Bar -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <span class="stat-num" id="statTotal">0</span>
+                            <span class="stat-label">Total Izin</span>
+                        </div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <span class="stat-num" id="statDisetujui">0</span>
+                            <span class="stat-label">Disetujui</span>
+                        </div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="stat-num" id="statMenunggu">0</span>
+                            <span class="stat-label">Menunggu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hero-buttons">
+                    <a href="siswa.html" class="btn-primary-hero">
+                        <div class="btn-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="btn-text">
+                            <span class="btn-label">Masuk sebagai</span>
+                            <span class="btn-title">Siswa</span>
+                        </div>
+                        <i class="fas fa-arrow-right btn-arrow"></i>
+                    </a>
+
+                    <a href="bk.html" class="btn-secondary-hero">
+                        <div class="btn-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="btn-text">
+                            <span class="btn-label">Masuk sebagai</span>
+                            <span class="btn-title">Guru BK</span>
+                        </div>
+                        <i class="fas fa-arrow-right btn-arrow"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual -->
+            <div class="hero-visual">
+                <div class="visual-card main-card">
+                    <div class="card-header-vis">
+                        <div class="card-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span>Dashboard BK</span>
+                    </div>
+                    <div class="card-body-vis">
+                        <div class="vis-row">
+                            <div class="vis-avatar">A</div>
+                            <div class="vis-info">
+                                <span class="vis-name">Ahmad Rizky</span>
+                                <span class="vis-class">XII IPA 1</span>
+                            </div>
+                            <span class="vis-badge approved">✓ Disetujui</span>
+                        </div>
+                        <div class="vis-row">
+                            <div class="vis-avatar blue">S</div>
+                            <div class="vis-info">
+                                <span class="vis-name">Siti Rahayu</span>
+                                <span class="vis-class">XI IPS 2</span>
+                            </div>
+                            <span class="vis-badge pending">⏳ Menunggu</span>
+                        </div>
+                        <div class="vis-row">
+                            <div class="vis-avatar purple">B</div>
+                            <div class="vis-info">
+                                <span class="vis-name">Budi Santoso</span>
+                                <span class="vis-class">X MIPA 3</span>
+                            </div>
+                            <span class="vis-badge warning">⚠ Review AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Cards -->
+                <div class="float-card fc1">
+                    <i class="fas fa-brain"></i>
+                    <div>
+                        <span class="fc-title">AI Analysis</span>
+                        <span class="fc-sub">Active</span>
+                    </div>
+                </div>
+
+                <div class="float-card fc2">
+                    <i class="fas fa-shield-check"></i>
+                    <div>
+                        <span class="fc-title">Secure</span>
+                        <span class="fc-sub">Supabase DB</span>
+                    </div>
+                </div>
+
+                <div class="float-card fc3">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <span class="fc-title">Responsive</span>
+                        <span class="fc-sub">All Devices</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6)">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <h3>Pengajuan Digital</h3>
+                <p>Ajukan izin keluar kelas kapan saja melalui form digital yang mudah digunakan</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6)">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Analisis AI</h3>
+                <p>Sistem AI membantu BK menganalisis dan memfilter pengajuan izin secara otomatis</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669)">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Notifikasi Real-time</h3>
+                <p>Pantau status izin secara langsung tanpa perlu menunggu informasi dari BK</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444)">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Data Tersimpan Aman</h3>
+                <p>Semua data tersimpan di Supabase dengan keamanan tingkat enterprise</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <p>© 2026 Smart BK Permission — Sistem Perizinan Digital untuk SMA</p>
+        <p class="footer-sub">Powered by Supabase • AI Rule-Based Analysis</p>
+    </footer>
+
+    <script src="js/supabase.js"></script>
+    <script>
+        // Load stats dari Supabase
+        async function loadLandingStats() {
+            try {
+                const stats = await getStats();
+                if (stats) {
+                    animateCounter('statTotal', stats.total_semua || 0);
+                    animateCounter('statDisetujui', stats.total_disetujui || 0);
+                    animateCounter('statMenunggu', stats.total_menunggu || 0);
+                }
+            } catch(e) {}
+        }
+
+        function animateCounter(id, target) {
+            const el = document.getElementById(id);
+            let start = 0;
+            const step = Math.ceil(target / 30);
+            const interval = setInterval(() => {
+                start = Math.min(start + step, target);
+                el.textContent = start;
+                if (start >= target) clearInterval(interval);
+            }, 40);
+        }
+
+        // Generate particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 5}s;
+                    animation-duration: ${3 + Math.random() * 4}s;
+                    width: ${2 + Math.random() * 4}px;
+                    height: ${2 + Math.random() * 4}px;
+                `;
+                container.appendChild(p);
+            }
+        }
+
+        createParticles();
+        loadLandingStats();
+    </script>
+</body>
+</html>
