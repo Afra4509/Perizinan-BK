@@ -73,14 +73,12 @@ async function submitIzin(event) {
         durasi: parseInt(document.getElementById('durasi').value)
     };
 
-    // Validasi alasan
     if (formData.alasan.length < 10) {
         showToast('Alasan izin harus minimal 10 karakter!', 'error');
         document.getElementById('alasan').focus();
         return;
     }
 
-    // Tunggu Supabase siap
     if (!window._supabase) {
         showToast('Koneksi ke database sedang disiapkan, coba lagi...', 'warning');
         return;
@@ -90,22 +88,15 @@ async function submitIzin(event) {
     showLoading('Mengirim pengajuan izin...');
 
     try {
-        const result = await insertIzin(formData);
-
+        await insertIzin(formData);
         hideLoading();
         showToast('Pengajuan izin berhasil dikirim! 🎉', 'success');
-
-        // Simpan nama terakhir untuk tracking status
         localStorage.setItem('lastNama', formData.nama_siswa);
-
-        // Reset form
         resetForm();
-
-        // Otomatis pindah ke tab status setelah 1.5 detik
         setTimeout(() => {
-            showTab('status', document.querySelectorAll('.nav-item')[1]);
+            const statusNavItem = document.querySelectorAll('.nav-item')[1];
+            showTab('status', statusNavItem);
         }, 1500);
-
     } catch (error) {
         hideLoading();
         console.error('Submit error:', error);
@@ -123,15 +114,19 @@ function resetForm() {
     document.getElementById('aiPreview').style.display = 'none';
 }
 
-// ---- Load Status ----
+// ---- Load & Render Status ----
 async function loadMyStatus() {
     if (!window._supabase) {
         setTimeout(loadMyStatus, 500);
         return;
     }
 
-    const searchVal = document.getElementById('searchNama')?.value.trim()
+    const searchVal = (document.getElementById('searchNama')?.value.trim())
         || localStorage.getItem('lastNama') || '';
+
+    if (searchVal) {
+        document.getElementById('searchNama').value = searchVal;
+    }
 
     if (!searchVal) {
         document.getElementById('statusList').innerHTML = `
@@ -152,7 +147,6 @@ async function loadMyStatus() {
         allMyIzin = await getMyIzin(searchVal);
         renderStatusList(allMyIzin);
 
-        // Update pending badge
         const pending = allMyIzin.filter(x => x.status === 'menunggu').length;
         const badge = document.getElementById('pendingBadge');
         if (badge) {
@@ -203,12 +197,7 @@ function renderStatusList(list) {
     }
 
     container.innerHTML = list.map(item => {
-        const statusIcon = {
-            menunggu: '⏳',
-            disetujui: '✅',
-            ditolak: '❌'
-        }[item.status] || '❓';
-
+        const statusIcon = { menunggu: '⏳', disetujui: '✅', ditolak: '❌' }[item.status] || '❓';
         const aiClass = item.ai_warning ? 'warning' : 'ok';
         const aiText = item.ai_warning ? '⚠ Perlu Perhatian' : '✅ Normal';
 
@@ -230,4 +219,54 @@ function renderStatusList(list) {
                     <span class="status-detail-value">${escHtml(item.guru_mapel)}</span>
                 </div>
                 <div class="status-detail-item">
-                    
+                    <span class="status-detail-label">Jam Pelajaran</span>
+                    <span class="status-detail-value">${escHtml(item.jam_pelajaran)}</span>
+                </div>
+                <div class="status-detail-item">
+                    <span class="status-detail-label">Durasi</span>
+                    <span class="status-detail-value">${item.durasi} menit</span>
+                </div>
+                <div class="status-detail-item">
+                    <span class="status-detail-label">Waktu Pengajuan</span>
+                    <span class="status-detail-value">${formatDate(item.created_at)}</span>
+                </div>
+                <div class="status-detail-item" style="grid-column:1/-1">
+                    <span class="status-detail-label">Alasan</span>
+                    <span class="status-detail-value">${escHtml(item.alasan)}</span>
+                </div>
+            </div>
+            <div class="status-card-footer">
+                <span class="ai-result-pill ${aiClass}">
+                    <i class="fas fa-robot"></i> ${aiText}
+                </span>
+                ${item.catatan_bk ? `
+                    <div class="catatan-bk-note" style="margin-top:0; margin-left:8px;">
+                        <i class="fas fa-comment-alt"></i> <strong>Catatan BK:</strong> ${escHtml(item.catatan_bk)}
+                    </div>` : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ---- Helpers ----
+function escHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function capitalize(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ---- Auto-init ----
+window.addEventListener('supabaseReady', () => {
+    const lastNama = localStorage.getItem('lastNama');
+    if (lastNama && document.getElementById('searchNama')) {
+        document.getElementById('searchNama').value = lastNama;
+    }
+});
