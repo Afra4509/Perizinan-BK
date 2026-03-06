@@ -262,7 +262,13 @@
         }
 
         createParticles();
-        loadLandingStats();
+
+        // Tunggu Supabase siap sebelum load stats
+        if (window._supabase) {
+            loadLandingStats();
+        } else {
+            window.addEventListener('supabaseReady', loadLandingStats, { once: true });
+        }
     </script>
 </body>
 </html>
